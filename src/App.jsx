@@ -6,31 +6,36 @@ import React, { useState } from "react";
 
 const App = () => {
   const availableIngredients = [
-    { name: "Kaiser Bun", color: "saddlebrown" },
-    { name: "Sesame Bun", color: "sandybrown" },
-    { name: "Gluten Free Bun", color: "peru" },
-    { name: "Lettuce Wrap", color: "olivedrab" },
-    { name: "Beef Patty", color: "#3F250B" },
-    { name: "Soy Patty", color: "#3F250B" },
-    { name: "Black Bean Patty", color: "#3F250B" },
-    { name: "Chicken Patty", color: "burlywood" },
-    { name: "Lettuce", color: "lawngreen" },
-    { name: "Tomato", color: "tomato" },
-    { name: "Bacon", color: "maroon" },
-    { name: "Onion", color: "lightyellow" },
-    { name: "Cheddar Cheese", color: "#FDE18B" },
-    { name: "Swiss Cheese", color: "#F1E1A8" },
+    { id: 1, name: "Kaiser Bun", color: "saddlebrown" },
+    { id: 2, name: "Sesame Bun", color: "sandybrown" },
+    { id: 3, name: "Gluten Free Bun", color: "peru" },
+    { id: 4, name: "Lettuce Wrap", color: "olivedrab" },
+    { id: 5, name: "Beef Patty", color: "#3F250B" },
+    { id: 6, name: "Soy Patty", color: "#3F250B" },
+    { id: 7, name: "Black Bean Patty", color: "#3F250B" },
+    { id: 8, name: "Chicken Patty", color: "burlywood" },
+    { id: 9, name: "Lettuce", color: "lawngreen" },
+    { id: 10, name: "Tomato", color: "tomato" },
+    { id: 11, name: "Bacon", color: "maroon" },
+    { id: 12, name: "Onion", color: "lightyellow" },
+    { id: 13, name: "Cheddar Cheese", color: "#FDE18B" },
+    { id: 14, name: "Swiss Cheese", color: "#F1E1A8" },
   ];
 
   const [stack, setStack] = useState([]);
 
   const handleAddIngredient = (ingredient) => {
-    setStack((prevStack) => [...prevStack, ingredient]);
+    setStack((prevStack) => [
+      ...prevStack,
+      { ...ingredient, uniqueId: ingredient.id + "-" + Date.now() },
+      // to add a unique id to handle duplicate items in burgerstack
+    ]);
   };
 
-  const handleRemoveIngredient = (ingredient) => {
-    setStack((prevStack) => prevStack.filter((_, i) => i !== index));
-    //_ is to refer to current element in prev array, i is the current index of the element
+  const handleRemoveIngredient = (uniqueId) => {
+    setStack((prevStack) =>
+      prevStack.filter((ingredient) => ingredient.uniqueId !== uniqueId)
+    );
   };
 
   return (

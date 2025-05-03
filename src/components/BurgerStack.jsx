@@ -5,10 +5,20 @@ const BurgerStack = (props) => {
     <div className="burger-stack">
       <h2>Your Burger</h2>
       <ul>
-        {props.stack.map((ingredient, index) => (
-          <li key={index} style={{ color: ingredient.color }}>
+        {props.stack.map((ingredient) => (
+          <li
+            key={ingredient.uniqueId}
+            style={{
+              backgroundColor: ingredient.color, // Using ingredient color as background
+              color: "white", // text color
+              padding: "8px",
+              borderRadius: "5px",
+            }}
+          >
             {ingredient.name}
-            <button onClick={() => props.onRemove(index)}>X</button>
+            <button onClick={() => props.onRemove(ingredient.uniqueId)}>
+              X
+            </button>
           </li>
         ))}
       </ul>
